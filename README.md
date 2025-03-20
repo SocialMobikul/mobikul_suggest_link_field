@@ -1,85 +1,128 @@
-# Mobikul Rich Link Field Flutter Package
+# Mobikul Suggest Link Field Flutter Package
 
-The `MobikulRichLinkField` is a powerful Flutter package that provides a text field with clickable segments for hashtags, mentions, and URLs. It allows you to easily create rich text experiences with interactive elements, perfect for social media applications, chat interfaces, and more.
-
-To find out more: https://mobikul.com/
+The `MobikulSuggestLinkField` is a highly customizable Flutter widget designed to provide a suggestion input field with features like search-as-you-type, auto-completion, and dynamic suggestions based on user input. This widget is perfect for enhancing user experience when inputting search queries, mentions, hashtags, or URLs.
 
 ## Features
 
-- **Clickable Hashtags**: Detect and highlight hashtags with custom styles and tap actions.
-- **Mentions**: Automatically recognize mentions (e.g., @username) and make them tappable.
-- **URL Detection**: Identify and style URLs with underlines, and open them on tap.
-- **Customizable Styles**: Fully customize the appearance of hashtags, mentions, and URLs.
-- **Hover Effects**: Subtle hover effects for better UX.
-- **Flexible Callbacks**: Easily handle taps on different segment types.
+- **Search-as-you-type**: Automatically provides suggestions based on user input.
+- **Custom Suggestions**: Display custom suggestions with any widget (e.g., icons, text).
+- **Auto-completion**: Provides suggested text that automatically fills in the input field as you type.
+- **Theme Customization**: Full customization for the appearance of the suggestion field.
+- **Multiple Input Types**: Works with text, numbers, mentions (`@`), hashtags (`#`), and URLs (`https://`).
+- **Link Behavior**: Supports clickable mentions, hashtags, and URLs.
 
 ## Installation
 
-To add `MobikulRichLinkField` to your project, include the following in your `pubspec.yaml` file:
+To add `mobikul_suggest_link_field` to your project, include the following in your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  mobikul_rich_link_field: # ^latest version
-```
+  mobikul_suggest_link_field: # ^latest version
 
-Then, fetch the package using the command:
-
-```bash
-flutter pub get
 ```
 
 ## Usage
-
 ### Import the Package
 ```dart
-import 'package:mobikul_rich_link_field/mobikul_rich_link_field.dart';
+  import 'package:mobikul_suggest_link_field/mobikul_suggest_link_field.dart';
 ```
-
-### Basic Example
+### Basic Mobikul Suggest Link Field Example
 ```dart
-MobikulRichLinkField(
-  decoration: InputDecoration(
-    hintText: 'Type a message...'
-  ),
-  onHashtagTap: (hashtag) => print('Hashtag tapped: \$hashtag'),
-  onMentionTap: (mention) => print('Mention tapped: \$mention'),
-  onUrlTap: (url) => print('URL tapped: \$url'),
-);
+MobikulSuggestLinkField(
+suggestions: _suggestions, // List of suggestions to display
+displayStyle: SuggestionDisplayStyle.list, // Display style (list, grid, or chips)
+onSelected: (Suggestion selected) {
+// Handle the selected suggestion
+print('Selected suggestion: ${selected.name}');
+},
+onHashtagTap: (hashtag) {
+// Handle hashtag tap
+print('Hashtag tapped: $hashtag');
+},
+onMentionTap: (mention) {
+// Handle mention tap
+print('Mention tapped: $mention');
+},
+onUrlTap: (url) {
+// Handle URL tap
+print('URL tapped: $url');
+},
+hintText: 'Type with #hashtags, @mentions, or URLs...',
+maxSuggestions: 5,
+suggestionItemHeight: 50.0,
+backgroundColor: Colors.white,
+highlightColor: Colors.blue,
+suggestionStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+onChanged: (text) {
+// Handle text change
+print('Text changed: $text');
+},
+)
+
 ```
 
-### Custom Styles and Callbacks
+### You can customize various aspects of the MobikulSuggestLinkField widget as shown below:
 ```dart
-MobikulRichLinkField(
-  hashtagStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-  mentionStyle: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-  urlStyle: TextStyle(color: Colors.purple, decoration: TextDecoration.underline),
-  onHashtagTap: (hashtag) => print('Tapped on hashtag: \$hashtag'),
-  onMentionTap: (mention) => print('Tapped on mention: \$mention'),
-  onUrlTap: (url) => print('Tapped on URL: \$url'),
-);
+MobikulSuggestLinkField(
+suggestions: _suggestions,
+displayStyle: SuggestionDisplayStyle.grid, // Grid display style
+maxSuggestions: 5,
+suggestionItemHeight: 50.0,
+backgroundColor: Theme.of(context).cardColor,
+highlightColor: Theme.of(context).primaryColor,
+suggestionStyle: TextStyle(fontSize: 14, color: Colors.grey[800]),
+onSelected: (selected) {
+print('Selected suggestion: ${selected.name}');
+},
+onChanged: (value) {
+print('Text changed: $value');
+},
+onHashtagTap: (hashtag) {
+print('Hashtag tapped: $hashtag');
+},
+onMentionTap: (mention) {
+print('Mention tapped: $mention');
+},
+onUrlTap: (url) {
+print('URL tapped: $url');
+},
+)
+
 ```
 
-## Parameters
+### Input Field Customization
+```dart
 
-| Property           | Type                  | Description                                      |
-|-------------------|-----------------------|--------------------------------------------------|
-| `onHashtagTap`     | `Function(String)`     | Callback when a hashtag is tapped.                |
-| `onMentionTap`     | `Function(String)`     | Callback when a mention is tapped.                |
-| `onUrlTap`         | `Function(String)`     | Callback when a URL is tapped.                    |
-| `hashtagStyle`     | `TextStyle?`           | Custom style for hashtags.                       |
-| `mentionStyle`     | `TextStyle?`           | Custom style for mentions.                       |
-| `urlStyle`         | `TextStyle?`           | Custom style for URLs.                           |
-| `textStyle`        | `TextStyle?`           | General text style for the input field.           |
+MobikulSuggestLinkField(
+suggestions: _suggestions,
+hintText: 'Type with #hashtags, @mentions, or URLs...',
+decoration: InputDecoration(
+labelText: 'Search for hashtags, mentions, or URLs',
+border: OutlineInputBorder(),
+filled: true,
+fillColor: Colors.grey[100],
+),
+textStyle: TextStyle(fontSize: 16),
+)
+
+
+```
+
+
+
 
 ## Output
 
-Here’s an example of the `MobikulRichLinkField` in action:
+Here are some examples of how the MobikulSuggestLinkField widget behaves:
 
-## Basic Text Field
-![basic Text Field](https://raw.githubusercontent.com/SocialMobikul/mobikul_rich_link_field/main/basic_package.gif)
+## Basic MobikulSuggestLinkField
+![Basic MobikulSuggestField](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_field/main/mobikul_suggest_feild_basic_example.gif)
 
-## Rich Text Field For Mention, Hashtag and URL detection
-![Rich Text Field](https://raw.githubusercontent.com/SocialMobikul/mobikul_rich_link_field/main/package_feature.gif)
+## Customize MobikulSuggestLinkField
+![Advance MobikulSuggestField](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_field/main/mobikul_suggest_field_customize_example.gif)
+
+## Decoration MobikulSuggestLinkField
+![MobikulSuggestField with Grid](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_field/main/mobikul_suggest_field_grid_example.gif)
 
 
-Start building interactive text fields today with the `MobikulRichLinkField` package! 🚀
+Start building amazing SuggestLinkField today with the `MobikulSuggestLinkField` package! 🚀
