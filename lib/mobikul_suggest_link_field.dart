@@ -1,4 +1,3 @@
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobikul_rich_link_field/mobikul_rich_link_field.dart';
@@ -42,19 +41,24 @@ class MobikulSuggestLinkField extends StatefulWidget {
 
   const MobikulSuggestLinkField(
       {super.key,
-        required this.suggestions,
-        this.backgroundColor, this.maxSuggestions = 5,
-        this.suggestionItemHeight = 50.0,
-        this.highlightColor,
-        required this.displayStyle,
-        this.suggestionStyle,
-        required this.onSelected, this.decoration,
-        this.hintText,
-        this.onChanged,
-        this.onHashtagTap, this.onMentionTap, this.onUrlTap});
+      required this.suggestions,
+      this.backgroundColor,
+      this.maxSuggestions = 5,
+      this.suggestionItemHeight = 50.0,
+      this.highlightColor,
+      required this.displayStyle,
+      this.suggestionStyle,
+      required this.onSelected,
+      this.decoration,
+      this.hintText,
+      this.onChanged,
+      this.onHashtagTap,
+      this.onMentionTap,
+      this.onUrlTap});
 
   @override
-  State<MobikulSuggestLinkField> createState() => _MobikulSuggestLinkFieldState();
+  State<MobikulSuggestLinkField> createState() =>
+      _MobikulSuggestLinkFieldState();
 }
 
 class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
@@ -97,36 +101,43 @@ class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
     int lastUrlSymbolIndex = currentText.lastIndexOf('http');
 
     // The position for the symbol is based on the last index of any of the symbols '@', '#', or URL.
-    int lastSymbolIndex = max(lastAtSymbolIndex, max(lastHashSymbolIndex, lastUrlSymbolIndex));
+    int lastSymbolIndex =
+        max(lastAtSymbolIndex, max(lastHashSymbolIndex, lastUrlSymbolIndex));
 
     if (lastSymbolIndex != -1) {
       // Check the symbol to determine the type (mention, hashtag, or URL)
       if (currentText[lastSymbolIndex] == '@') {
         // For mentions: Append the suggestion with '@'
-        String prefix = currentText.substring(0, lastSymbolIndex);  // Keep all text before '@'
-        String newText = '$prefix@${suggestion.name}';  // Add the @ symbol and selected suggestion
+        String prefix = currentText.substring(
+            0, lastSymbolIndex); // Keep all text before '@'
+        String newText =
+            '$prefix@${suggestion.name}'; // Add the @ symbol and selected suggestion
 
         _controller.text = newText;
-        _controller.selection = TextSelection.fromPosition(TextPosition(offset: newText.length));
-        _controller.updateSegments();  // Update segments for clickable mention
-      }
-      else if (currentText[lastSymbolIndex] == '#') {
+        _controller.selection =
+            TextSelection.fromPosition(TextPosition(offset: newText.length));
+        _controller.updateSegments(); // Update segments for clickable mention
+      } else if (currentText[lastSymbolIndex] == '#') {
         // For hashtags: Append the suggestion with '#'
-        String prefix = currentText.substring(0, lastSymbolIndex);  // Keep all text before '#'
-        String newText = '$prefix#${suggestion.name}';  // Add the # symbol and selected suggestion
+        String prefix = currentText.substring(
+            0, lastSymbolIndex); // Keep all text before '#'
+        String newText =
+            '$prefix#${suggestion.name}'; // Add the # symbol and selected suggestion
 
         _controller.text = newText;
-        _controller.selection = TextSelection.fromPosition(TextPosition(offset: newText.length));
-        _controller.updateSegments();  // Update segments for clickable hashtag
-      }
-      else if (currentText.startsWith('http', lastSymbolIndex)) {
+        _controller.selection =
+            TextSelection.fromPosition(TextPosition(offset: newText.length));
+        _controller.updateSegments(); // Update segments for clickable hashtag
+      } else if (currentText.startsWith('http', lastSymbolIndex)) {
         // For URLs: Handle URL insertion
-        String prefix = currentText.substring(0, lastSymbolIndex);  // Keep all text before URL
-        String newText = '$prefix${suggestion.name}';  // Directly add the URL
+        String prefix = currentText.substring(
+            0, lastSymbolIndex); // Keep all text before URL
+        String newText = '$prefix${suggestion.name}'; // Directly add the URL
 
         _controller.text = newText;
-        _controller.selection = TextSelection.fromPosition(TextPosition(offset: newText.length));
-        _controller.updateSegments();  // Update segments for clickable URL
+        _controller.selection =
+            TextSelection.fromPosition(TextPosition(offset: newText.length));
+        _controller.updateSegments(); // Update segments for clickable URL
       }
     }
 
@@ -149,8 +160,8 @@ class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
         // Filter suggestions based on the text that follows '@' or '#'
         _filteredSuggestions = widget.suggestions
             .where((suggestion) => suggestion.name
-            .toLowerCase()
-            .contains(searchText.toLowerCase()))
+                .toLowerCase()
+                .contains(searchText.toLowerCase()))
             .toList();
       } else {
         // If no '@' or '#' is found, don't show suggestions
@@ -158,7 +169,6 @@ class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -168,11 +178,13 @@ class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
         const SizedBox(height: 16),
         MobikulRichLinkField(
           controller: _controller,
-          decoration: widget.decoration ?? InputDecoration(
-            hintText: widget.hintText ?? 'Type with #hashtags, @mentions, or https://urls...',
-            border: const OutlineInputBorder(),
-            contentPadding: const EdgeInsets.all(16),
-          ),
+          decoration: widget.decoration ??
+              InputDecoration(
+                hintText: widget.hintText ??
+                    'Type with #hashtags, @mentions, or https://urls...',
+                border: const OutlineInputBorder(),
+                contentPadding: const EdgeInsets.all(16),
+              ),
           textStyle: const TextStyle(fontSize: 16),
           hashtagStyle: const TextStyle(
             color: Colors.blue,
@@ -188,22 +200,22 @@ class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
           ),
           onChanged: (value) {
             _onTextChanged();
-            if(widget.onChanged != null){
+            if (widget.onChanged != null) {
               widget.onChanged!(value);
             }
           },
           onHashtagTap: (hashtag) {
-            if(widget.onHashtagTap != null){
+            if (widget.onHashtagTap != null) {
               widget.onHashtagTap!(hashtag);
             }
           },
           onMentionTap: (mention) {
-            if(widget.onMentionTap != null){
+            if (widget.onMentionTap != null) {
               widget.onMentionTap!(mention);
             }
           },
           onUrlTap: (url) {
-            if(widget.onUrlTap != null){
+            if (widget.onUrlTap != null) {
               widget.onUrlTap!(url);
             }
           },
@@ -224,7 +236,7 @@ class _MobikulSuggestLinkFieldState extends State<MobikulSuggestLinkField> {
                 highlightColor: widget.highlightColor,
                 suggestionStyle: widget.suggestionStyle,
                 onSuggestionSelected:
-                _onSuggestionSelected), // Display the filtered suggestions
+                    _onSuggestionSelected), // Display the filtered suggestions
           )
       ],
     );

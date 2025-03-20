@@ -1,7 +1,7 @@
 name: mobikul_suggest_link_field
-description: "A new Flutter package project."
+description: "Mobikul Suggest Link Field is a Flutter package with an interactive text field supporting clickable hashtags, mentions, and URLs for a better user experience."
 
-version: 0.0.1
+version: 0.0.2
 
 homepage: https://github.com/SocialMobikul/mobikul_suggest_link_field
 repository: https://github.com/SocialMobikul/mobikul_suggest_link_field

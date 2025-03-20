@@ -2,6 +2,8 @@
 
 The `MobikulSuggestLinkField` is a highly customizable Flutter widget designed to provide a suggestion input field with features like search-as-you-type, auto-completion, and dynamic suggestions based on user input. This widget is perfect for enhancing user experience when inputting search queries, mentions, hashtags, or URLs.
 
+To find out more: https://mobikul.com/
+
 ## Features
 
 - **Search-as-you-type**: Automatically provides suggestions based on user input.
@@ -116,13 +118,13 @@ textStyle: TextStyle(fontSize: 16),
 Here are some examples of how the MobikulSuggestLinkField widget behaves:
 
 ## Basic MobikulSuggestLinkField
-![Basic MobikulSuggestField](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_field/main/mobikul_suggest_feild_basic_example.gif)
+![Basic MobikulSuggestLinkField](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_link_field/main/basic_field.gif)
 
 ## Customize MobikulSuggestLinkField
-![Advance MobikulSuggestField](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_field/main/mobikul_suggest_field_customize_example.gif)
+![Advance MobikulSuggestLinkField](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_link_field/main/customized_field.gif)
 
 ## Decoration MobikulSuggestLinkField
-![MobikulSuggestField with Grid](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_field/main/mobikul_suggest_field_grid_example.gif)
+![MobikulSuggestLinkField with Decoration](https://raw.githubusercontent.com/SocialMobikul/mobikul_suggest_link_field/main/decoration_field.gif)
 
 
 Start building amazing SuggestLinkField today with the `MobikulSuggestLinkField` package! 🚀
